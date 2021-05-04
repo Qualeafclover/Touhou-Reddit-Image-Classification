@@ -1,2 +1,2 @@
-# 2hu_Image_Classification_Reddit
+# Touhou Reddit Image Classification
  Touhou characters image classification on reddit
