@@ -38,6 +38,7 @@ while True:
                 pass
             elif url.startswith('https://www.pixiv.net/en/artworks/'):
                 url = mention.submission.thumbnail
+            else: continue
             # Download image
             while True:
                 try:
