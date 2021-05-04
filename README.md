@@ -7,9 +7,13 @@
 Image urls in the text files include NSFW ones, please look at your own risk.
 
 Note that I will not take ANY responsibilities arised from using my code, such as but not limiting to:
-	Being suspended on Pixiv due to breaking its TOS
-	Being suspended from reddit/subreddits from bot usage
-	Downloading of malicious images
+
+- Being suspended on Pixiv due to breaking its TOS
+
+- Being suspended from reddit/subreddits from bot usage
+
+- Downloading of malicious images
+
 
 You probably won't need all these modules, but here is my pip if you want to match the exact versions.
 
