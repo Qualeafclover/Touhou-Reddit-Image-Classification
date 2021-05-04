@@ -34,32 +34,35 @@ while True:
         if (mention.subreddit == SUBREDDIT) or ALL_SUBREDDIT:
             # Checks image post
             url = mention.submission.url
-            if url.startswith('https://i.redd.it/'):
-                # Download image
-                while True:
-                    try:
-                        res = requests.get(url=url, verify=False, stream=True)
-                        rawdata = res.raw.read()
-                        break
-                    except (ConnectionError, ConnectionAbortedError, ProtocolError):
-                        time.sleep(1)
-                nparr = np.frombuffer(rawdata, np.uint8)
-                image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
-                image = cv2.resize(image, RESIZE)
-                image = np.expand_dims(image, 0)
-                image = image.astype(np.float32)
-                image = image/255
+            if url.startswith('https://i.redd.it/') or url.startswith('https://i.imgur.com/'):
+                pass
+            elif url.startswith('https://www.pixiv.net/en/artworks/'):
+                url = mention.submission.thumbnail
+            # Download image
+            while True:
+                try:
+                    res = requests.get(url=url, verify=False, stream=True)
+                    rawdata = res.raw.read()
+                    break
+                except (ConnectionError, ConnectionAbortedError, ProtocolError):
+                    time.sleep(1)
+            nparr = np.frombuffer(rawdata, np.uint8)
+            image = cv2.imdecode(nparr, cv2.IMREAD_COLOR)
+            image = cv2.resize(image, RESIZE)
+            image = np.expand_dims(image, 0)
+            image = image.astype(np.float32)
+            image = image/255
 
-                pred = model.predict(image)
-                pred = thclist.one_hot_decode(pred, top=3, round_num=3, english=True)[0]
+            pred = model.predict(image)
+            pred = thclist.one_hot_decode(pred, top=3, round_num=3, english=True)[0]
 
-                reply = 'Here is what I think it is...\n\n'
-                for character in pred:
-                    reply += f'{character}: {round(pred[character]*100, 3)}%\n\n'
-                reply += '''Kappa kappa I am a bot made by Nitori~'''
+            reply = 'Here is what I think it is...\n\n'
+            for character in pred:
+                reply += f'{character}: {round(pred[character]*100, 3)}%\n\n'
+            reply += '''Kappa kappa I am a bot made by Nitori~'''
 
-                print(pred)
-                print(reply + '\n')
-                mention.reply(reply)
+            print(pred)
+            print(reply + '\n')
+            mention.reply(reply)
     # Yeah take a break
     time.sleep(5)
