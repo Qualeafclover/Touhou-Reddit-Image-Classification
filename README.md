@@ -10,7 +10,7 @@ Note that I will not take ANY responsibilities arised from using my code, such a
 
 - Being suspended on Pixiv due to breaking its TOS
 
-- Being suspended from reddit/subreddits from bot usage
+- Being suspended on reddit/subreddits from bot usage
 
 - Downloading of malicious images
 
